@@ -22,4 +22,14 @@
     <style name="Theme.Subtract4Digits.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.Subtract4Digits.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="Theme.Subtract4Digits.NumbersTop">
+        <item name="android:textSize">50sp</item>
+        <item name="android:baselineAlignBottom">true</item>
+        <item name="android:textColor">@android:color/holo_green_dark</item>
+    </style>
+    <style name="Theme.Subtract4Digits.Numbers">
+        <item name="android:textSize">100sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
 </resources>

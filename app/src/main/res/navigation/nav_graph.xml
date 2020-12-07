@@ -7,22 +7,22 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="alex.carcar.subtract4digits.FirstFragment"
+        android:name="alex.carcar.subtract4digits.TitleFragment"
         android:label="@string/first_fragment_label"
-        tools:layout="@layout/title_page">
+        tools:layout="@layout/title_fragment">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
+            android:id="@+id/action_start_game"
             app:destination="@id/SecondFragment" />
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="alex.carcar.subtract4digits.SecondFragment"
+        android:name="alex.carcar.subtract4digits.SubtractFragment"
         android:label="@string/second_fragment_label"
-        tools:layout="@layout/game_page">
+        tools:layout="@layout/subtract_fragment">
 
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
+            android:id="@+id/action_finish"
             app:destination="@id/FirstFragment" />
     </fragment>
 </navigation>
