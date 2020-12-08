@@ -2,29 +2,34 @@ package alex.carcar.subtract4digits
 
 import android.graphics.Paint
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.subtract_fragment.*
+
 
 class SubtractFragment : Fragment() {
 
     private var first = 0
     private var second = 0
+    private lateinit var _view: View
 
     override fun onCreateView(i: LayoutInflater, container: ViewGroup?, state: Bundle?): View? {
         return i.inflate(R.layout.subtract_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, state: Bundle?) {
+        _view = view
         super.onViewCreated(view, state)
         createQuestion()
-        button_second.setOnClickListener({
-            finish()
-        })
+        button_second.setOnClickListener {
+            check()
+        }
     }
 
     private fun createQuestion() {
@@ -35,6 +40,7 @@ class SubtractFragment : Fragment() {
             first = second
             second = temp
         }
+
         val f = first.toString()
         val s = second.toString()
         _0.text = "      "
@@ -58,36 +64,76 @@ class SubtractFragment : Fragment() {
         b3.paintFlags = Paint.UNDERLINE_TEXT_FLAG
         b4.paintFlags = Paint.UNDERLINE_TEXT_FLAG
 
-        a3.setOnClickListener({
-            borrow(a3, _3, _4)
-        })
-
-        a2.setOnClickListener({
-            borrow(a2, _2, _3)
-        })
-
-        a1.setOnClickListener({
-            borrow(a1, _1, _2)
-        })
+        a3.setOnClickListener { borrow(a3, _3, _4) }
+        a2.setOnClickListener { borrow(a2, _2, _3) }
+        a1.setOnClickListener { borrow(a1, _1, _2) }
     }
 
-    private fun borrow(d: TextView, top: TextView, friend: TextView) {
+    private fun borrow(d: TextView, top: TextView, nextTop: TextView) {
+        val digit = myInt(d)
+        val nt = myInt(nextTop)
+        val t = myVal(top)
+        if (digit == 0 && t == 0) return // can't borrow from zero
         if (d.paintFlags == Paint.STRIKE_THRU_TEXT_FLAG) {
             d.paintFlags = 0x00
             top.text = "  "
-            friend.text = " "
+            nextTop.text = "  "
         } else {
             d.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
-            top.text = " "+ (numberValue(d.text) - 1).toString()
-            friend.text = "1 "
+            top.text = " " + ((t * 10 + digit) - 1).toString()
+            if (nt == -1) {
+                nextTop.text = " 1"
+            } else {
+                nextTop.text = " " + (10 + nt).toString()
+            }
         }
     }
 
-    private fun numberValue(x: CharSequence?): Int {
-        return x!![0].toInt() - '0'.toInt()
+    private fun myInt(textView: TextView): Int {
+        val s = textView.text.toString().trim()
+        if (s == "") return -1
+        return Integer.parseInt(s)
     }
 
-    private fun finish() {
-        findNavController().navigate(R.id.action_finish)
+    private fun myVal(textView: TextView): Int {
+        val x = myInt(textView)
+        if (x < 0) return 0
+        return x
+    }
+
+    private fun check() {
+        val answer = first - second
+        val response = myVal(c1) * 1000 + myVal(c2) * 100 + myVal(c3) * 10 + myVal(c4)
+        if (answer == response) {
+            val finishedListener: View.OnClickListener = View.OnClickListener {
+                findNavController().navigate(R.id.action_finish)
+            }
+            Snackbar.make(_view, "Good job!", Snackbar.LENGTH_LONG)
+                .setAction("Close", finishedListener).show()
+            questionGrid.visibility = View.INVISIBLE
+            button_second.visibility = View.INVISIBLE
+            successImage.visibility = View.VISIBLE
+            val imageIDs = arrayOf(
+                R.drawable.dance0,
+                R.drawable.dance1,
+                R.drawable.dance2,
+                R.drawable.dance3,
+                R.drawable.dance4
+            )
+            var i = 0
+            object : CountDownTimer(6000, 250) {
+                override fun onTick(millisUntilFinished: Long) {
+                    successImage.setImageResource(imageIDs[i % 5])
+                    i++
+                }
+
+                override fun onFinish() {
+                    findNavController().navigate(R.id.action_finish)
+                }
+            }.start()
+        } else {
+            Snackbar.make(_view, "Keep trying!", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show()
+        }
     }
 }

@@ -10,6 +10,7 @@
         android:id="@+id/questionGrid"
         android:layout_width="411dp"
         android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <TableRow
@@ -153,7 +154,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="number"
-                android:text="" />
+                android:text=""
+                android:hint="@string/blank"
+                android:autofillHints="" />
 
             <EditText
                 android:id="@+id/c2"
@@ -161,7 +164,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="number"
-                android:text="" />
+                android:text="@string/blank"
+                android:hint="@string/blank"
+                android:autofillHints="" />
 
             <EditText
                 android:id="@+id/c3"
@@ -169,7 +174,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="number"
-                android:text="" />
+                android:text=""
+                android:hint="@string/blank"
+                android:autofillHints="@string/blank" />
 
             <EditText
                 android:id="@+id/c4"
@@ -177,7 +184,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="number"
-                android:text="" />
+                android:text=""
+                android:hint="@string/blank"
+                android:autofillHints="@string/blank" />
         </TableRow>
     </TableLayout>
 
@@ -185,9 +194,21 @@
         android:id="@+id/button_second"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/previous"
+        android:text="@string/check"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/questionGrid" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/successImage"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="parent"
+        android:contentDescription="@string/blank" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

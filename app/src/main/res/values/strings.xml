@@ -5,9 +5,10 @@
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
     <string name="start">Start</string>
-    <string name="previous">Previous</string>
+    <string name="check">Check</string>
 
     <string name="title">Subtract 4 Digits</string>
     <string name="creators">by George and Alex</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="blank" />
 </resources>
