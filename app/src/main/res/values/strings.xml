@@ -11,4 +11,5 @@
     <string name="creators">by George and Alex</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="blank" />
+    <string name="_0">0</string>
 </resources>

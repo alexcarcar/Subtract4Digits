@@ -8,13 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.subtract_fragment.*
 
 
 class SubtractFragment : Fragment() {
-
+    private lateinit var viewModel: MainViewModel
     private var first = 0
     private var second = 0
     private lateinit var _view: View
@@ -24,6 +25,7 @@ class SubtractFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, state: Bundle?) {
+        viewModel = ViewModelProvider(this.requireActivity()).get(MainViewModel::class.java)
         _view = view
         super.onViewCreated(view, state)
         createQuestion()
@@ -40,7 +42,6 @@ class SubtractFragment : Fragment() {
             first = second
             second = temp
         }
-
         val f = first.toString()
         val s = second.toString()
         _0.text = "      "
@@ -128,6 +129,7 @@ class SubtractFragment : Fragment() {
                 }
 
                 override fun onFinish() {
+                    viewModel.setPoints(viewModel.getPoints() + 50)
                     findNavController().navigate(R.id.action_finish)
                 }
             }.start()

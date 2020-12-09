@@ -156,6 +156,7 @@
                 android:inputType="number"
                 android:text=""
                 android:hint="@string/blank"
+                android:maxLength="1"
                 android:autofillHints="" />
 
             <EditText
@@ -163,6 +164,7 @@
                 style="@style/Theme.Subtract4Digits.Numbers"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:maxLength="1"
                 android:inputType="number"
                 android:text="@string/blank"
                 android:hint="@string/blank"
@@ -175,6 +177,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:text=""
+                android:maxLength="1"
                 android:hint="@string/blank"
                 android:autofillHints="@string/blank" />
 
@@ -185,6 +188,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:text=""
+                android:maxLength="1"
                 android:hint="@string/blank"
                 android:autofillHints="@string/blank" />
         </TableRow>

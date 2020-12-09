@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity() {
             Snackbar.make(view, "Created by George and Alex! :)", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
